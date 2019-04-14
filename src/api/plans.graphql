@@ -1,0 +1,69 @@
+# @format
+
+query getPlans($skip: Int, $limit: Int, $sort: [String]) {
+  plans(skip: $skip, limit: $limit, sort: $sort) {
+    data {
+      id
+      ...plan
+    }
+    count
+    pages
+  }
+}
+
+query getPlan($planId: String!) {
+  plan(id: $planId) {
+    id
+    ...plan
+  }
+}
+
+query getDataForPlanCreation {
+  products(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+query getDataForPlanUpdating($planId: String!) {
+  plan(id: $planId) {
+    id
+    ...plan
+  }
+  products(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+mutation createPlan($data: PlanCreateInput!) {
+  createPlan(data: $data) {
+    id
+    ...plan
+  }
+}
+
+mutation updatePlan($planId: String!, $data: PlanInput!) {
+  updatePlan(id: $planId, data: $data) {
+    id
+    ...plan
+  }
+}
+
+mutation removePlan($planId: String!) {
+  removePlan(id: $planId) {
+    id
+  }
+}
+
+fragment plan on Plan {
+  id
+  name
+  productId
+  amount
+  active
+}

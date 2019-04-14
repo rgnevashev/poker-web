@@ -1,0 +1,50 @@
+# @format
+
+query getClients($q: String, $skip: Int, $limit: Int, $sort: [String]) {
+  clients(q: $q, skip: $skip, limit: $limit, sort: $sort) {
+    data {
+      id
+      ...client
+    }
+    count
+    pages
+  }
+}
+
+query getClient($clientId: String!) {
+  client(id: $clientId) {
+    id
+    ...client
+  }
+}
+
+mutation createClient($data: ClientInput!) {
+  createClient(data: $data) {
+    id
+    ...client
+  }
+}
+
+mutation updateClient($clientId: String!, $data: ClientInput!) {
+  updateClient(id: $clientId, data: $data) {
+    id
+    ...client
+  }
+}
+
+mutation removeClient($clientId: String!) {
+  removeUser(id: $clientId) {
+    id
+  }
+}
+
+fragment client on Client {
+  id
+  name
+  email
+  phone
+  avatar
+  country
+  currency
+  timezone
+}

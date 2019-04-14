@@ -1,0 +1,84 @@
+# @format
+
+query getAppContext {
+  user: me {
+    id
+    ...user
+    ...userProfile
+    roles
+    lastLoginAt
+  }
+}
+
+query getMe {
+  me {
+    id
+    ...user
+    ...userProfile
+  }
+}
+
+mutation updateMe($data: UserInput!) {
+  updateMe(data: $data) {
+    id
+    ...user
+    ...userProfile
+  }
+}
+
+mutation changeEmailAddress($email: EmailAddress!) {
+  changeEmailAddress(email: $email) {
+    id
+  }
+}
+
+mutation signup($data: SignUpDataInput!) {
+  signup(data: $data) {
+    token
+  }
+}
+
+mutation login($email: EmailAddress!, $password: Password!) {
+  login(email: $email, password: $password) {
+    token
+  }
+}
+
+mutation forgotPassword($email: EmailAddress!) {
+  forgotPassword(email: $email) {
+    token
+  }
+}
+
+mutation resetPassword($token: String!, $password: Password!) {
+  resetPassword(token: $token, password: $password) {
+    token
+  }
+}
+
+mutation changePassword($currentPassword: Password!, $password: Password!, $confirmPassword: Password!) {
+  changePassword(currentPassword: $currentPassword, password: $password, confirmPassword: $confirmPassword) {
+    id
+  }
+}
+
+fragment user on User {
+  id
+  name
+  email
+  phone
+  avatar
+}
+
+fragment userProfile on User {
+  profile {
+    name
+    firstName
+    lastName
+    avatar
+    phone
+    country
+    currency
+    timezone
+  }
+}

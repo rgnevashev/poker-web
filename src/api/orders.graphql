@@ -1,0 +1,93 @@
+# @format
+
+query getOrders($userId: String, $skip: Int, $limit: Int, $sort: [String]) {
+  orders(userId: $userId, skip: $skip, limit: $limit, sort: $sort) {
+    data {
+      id
+      ...order
+      createdAt
+    }
+    count
+    pages
+  }
+}
+
+query getOrder($orderId: String!) {
+  order(id: $orderId) {
+    id
+    ...order
+    createdAt
+  }
+}
+
+query getDataForOrderCreation {
+  clients(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+  products(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+query getDataForOrderUpdating($orderId: String!) {
+  order(id: $orderId) {
+    id
+    ...order
+  }
+  clients(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+  products(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+mutation createOrder($data: OrderCreateInput!) {
+  createOrder(data: $data) {
+    id
+    ...order
+  }
+}
+
+mutation updateOrder($orderId: String!, $data: OrderInput!) {
+  updateOrder(id: $orderId, data: $data) {
+    id
+    ...order
+  }
+}
+
+mutation refundOrder($orderId: String!, $data: OrderInput) {
+  refundOrder(id: $orderId, data: $data) {
+    id
+    ...order
+  }
+}
+
+mutation cancelOrder($orderId: String!, $data: OrderInput) {
+  cancelOrder(id: $orderId, data: $data) {
+    id
+    ...order
+  }
+}
+
+fragment order on Order {
+  id
+  userId
+  productId
+  planId
+  amount
+  licenseKey
+  status
+}

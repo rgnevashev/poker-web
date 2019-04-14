@@ -1,0 +1,98 @@
+# @format
+
+query getPayments($userId: String, $skip: Int, $limit: Int, $sort: [String]) {
+  payments(userId: $userId, skip: $skip, limit: $limit, sort: $sort) {
+    data {
+      id
+      ...payment
+      createdAt
+    }
+    count
+    pages
+  }
+}
+
+query getPayment($paymentId: String!) {
+  payment(id: $paymentId) {
+    id
+    ...payment
+    createdAt
+  }
+}
+
+query getDataForPaymentCreation {
+  clients(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+  products(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+  orders(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+query getDataForPaymentUpdating($paymentId: String!) {
+  payment(id: $paymentId) {
+    id
+    ...payment
+  }
+  clients(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+  products(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+  orders(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+mutation createPayment($data: PaymentCreateInput!) {
+  createPayment(data: $data) {
+    id
+    ...payment
+  }
+}
+
+mutation updatePayment($paymentId: String!, $data: PaymentInput!) {
+  updatePayment(id: $paymentId, data: $data) {
+    id
+    ...payment
+  }
+}
+
+mutation refundPayment($paymentId: String!, $data: PaymentInput) {
+  refundPayment(id: $paymentId, data: $data) {
+    id
+    ...payment
+  }
+}
+
+fragment payment on Payment {
+  id
+  userId
+  productId
+  planId
+  orderId
+  amount
+  status
+}

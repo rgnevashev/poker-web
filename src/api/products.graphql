@@ -1,0 +1,83 @@
+# @format
+
+query getProducts($skip: Int, $limit: Int, $sort: [String]) {
+  products(skip: $skip, limit: $limit, sort: $sort) {
+    data {
+      id
+      ...product
+      ...productPlans
+    }
+    count
+    pages
+  }
+}
+
+query getProduct($productId: String!) {
+  product(id: $productId) {
+    id
+    ...product
+    ...productPlans
+  }
+}
+
+query getDataForProductCreation {
+  plans(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+query getDataForProductUpdating($productId: String!) {
+  product(id: $productId) {
+    id
+    ...product
+    ...productPlans
+  }
+  plans(limit: 0, sort: ["name", "1"]) {
+    data {
+      id
+      name
+    }
+  }
+}
+
+mutation createProduct($data: ProductCreateInput!) {
+  createProduct(data: $data) {
+    id
+    ...product
+    ...productPlans
+  }
+}
+
+mutation updateProduct($productId: String!, $data: ProductInput!) {
+  updateProduct(id: $productId, data: $data) {
+    id
+    ...product
+    ...productPlans
+  }
+}
+
+mutation removeProduct($productId: String!) {
+  removeProduct(id: $productId) {
+    id
+  }
+}
+
+fragment product on Product {
+  id
+  name
+  amount
+  #plans
+  active
+}
+
+fragment productPlans on Product {
+  plans {
+    id
+    name
+    amount
+    active
+  }
+}
