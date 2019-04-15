@@ -1,6 +1,11 @@
 /** @format */
 
+import { createAction } from 'redux-actions'
 import localforage from 'localforage'
+
+export const toggleSider = createAction('TOGGLE_SIDER')
+export const hideSider = createAction('HIDE_SIDER')
+export const showSider = createAction('SHOW_SIDER')
 
 /*
  * { token, userId, tokenExpires }

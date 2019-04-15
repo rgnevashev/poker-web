@@ -5,6 +5,8 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import teal from '@material-ui/core/colors/teal'
 import red from '@material-ui/core/colors/red'
 
+const drawerWidth = 250
+
 export default () => {
   const theme = createMuiTheme({
     typography: {
@@ -23,6 +25,7 @@ export default () => {
     shape: {
       borderRadius: 8
     },
+    drawerWidth,
     overrides: {
       MuiButton: {
         raisedPrimary: {
@@ -31,7 +34,7 @@ export default () => {
       },
       MuiDrawer: {
         paper: {
-          minWidth: 250
+          minWidth: drawerWidth
         },
         paperAnchorDockedLeft: {
           borderRight: 'none'

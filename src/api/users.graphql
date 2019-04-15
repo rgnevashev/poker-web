@@ -38,7 +38,7 @@ mutation signup($data: SignUpDataInput!) {
   }
 }
 
-mutation login($email: EmailAddress!, $password: Password!) {
+mutation login($email: EmailAddress!, $password: String!) {
   login(email: $email, password: $password) {
     token
   }
