@@ -1,12 +1,12 @@
 /** @format */
 
-import Validators, { addValidator } from 'redux-form-validators'
+import Validators, { addValidator } from 'lib/redux-form-validators'
 
 Object.assign(Validators.defaultOptions, {
   allowBlank: true
 })
 
-export * from 'redux-form-validators'
+export * from 'lib/redux-form-validators'
 
 export const password = addValidator({
   validator(options, value, allValues) {
