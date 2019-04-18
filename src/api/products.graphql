@@ -43,7 +43,7 @@ query getDataForProductUpdating($productId: String!) {
   }
 }
 
-mutation createProduct($data: ProductCreateInput!) {
+mutation createProduct($data: ProductInput!) {
   createProduct(data: $data) {
     id
     ...product

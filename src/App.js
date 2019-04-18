@@ -11,7 +11,7 @@ import Head from 'Head'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import AuthModule from 'components/Auth'
-import UserModule from 'components/User'
+import MainLayout from 'layouts/Default'
 
 import AppContext from 'AppContext'
 
@@ -28,7 +28,7 @@ const App = () => (
               path={`/`}
               render={props =>
                 user ? (
-                  <UserModule {...props} />
+                  <MainLayout {...props} />
                 ) : (
                   <Redirect
                     from={props.location.pathname}

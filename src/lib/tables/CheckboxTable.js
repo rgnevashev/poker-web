@@ -6,9 +6,6 @@ import { Query } from 'react-apollo'
 import Table from 'react-table'
 import checkboxHOC from 'react-table/lib/hoc/selectTable'
 
-import 'react-table/react-table.css'
-import 'assets/css/react-table-material.css'
-
 import withStyles from '@material-ui/core/styles/withStyles'
 import Button from '@material-ui/core/Button'
 import Checkbox from '@material-ui/core/Checkbox'

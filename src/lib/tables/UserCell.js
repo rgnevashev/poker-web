@@ -11,7 +11,7 @@ const UserCell = ({ user = {} }) => (
   <div className="d-flex flex-row">
     {user && (
       <React.Fragment>
-        <Avatar {...user} size={40} round />
+        <Avatar {...user} style={{ marginRight: 7 }} size={40} round />
         <address className="d-flex flex-column m-l-5">
           <strong>{user.name}</strong>
           {user.email && (

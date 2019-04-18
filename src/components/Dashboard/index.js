@@ -1,40 +1,18 @@
 /** @format */
 
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { withSnackbar } from 'notistack'
+
+import withStyles from '@material-ui/core/styles/withStyles'
 
 import AppContext from 'AppContext'
 
-import Admin from './Admin'
-import Client from './Client'
-import Agency from './Agency'
-
-export default ({ match }) => (
+const Dashboard = ({ classes, history, match, enqueueSnackbar }) => (
   <React.Fragment>
-    <AppContext.Consumer>
-      {({ user }) => {
-        let Component = null
-        if (user && user.accountType === 'admin') {
-          Component = Admin
-        } else if (user && user.accountType === 'agency') {
-          Component = Agency
-        } else {
-          Component = Client
-        }
-        return (
-          <React.Fragment>
-            <Route path={`${match.path}`} component={Component} />
-          </React.Fragment>
-        )
-      }}
-    </AppContext.Consumer>
+    <AppContext.Consumer>{({ user }) => <div>Dashboard</div>}</AppContext.Consumer>
   </React.Fragment>
 )
 
-/*
+const styles = () => ({})
 
-    <Switch>
-      <Route path={`${match.path}/page/:id`} component={Page} />
-      <Route path={`${match.path}`} component={Pages} />
-    </Switch>
-*/
+export default withStyles(styles)(withSnackbar(Dashboard))

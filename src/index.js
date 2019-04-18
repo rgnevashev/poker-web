@@ -2,12 +2,15 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import 'index.css'
 import { ApolloProvider } from 'react-apollo'
 import { Provider as StoreProvider } from 'react-redux'
 import { BrowserRouter as RouterProvider } from 'react-router-dom'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import { SnackbarProvider } from 'notistack'
+
+// Styles
+import 'index.css'
+import 'styles'
 
 // Apollo
 import createApolloClient from 'apollo'

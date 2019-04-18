@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Query, FormDialog, Field } from 'components'
-import { TextField, Checkbox } from 'lib/redux-form-material-ui'
+import { TextField } from 'lib/fields'
 
 import { getDataForProductCreation, createProduct } from 'api/products.graphql'
 

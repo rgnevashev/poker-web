@@ -1,41 +1,35 @@
 /** @format */
 
 import React from 'react'
-import { Query, FormDialog, FormSection, ClientCreation } from 'components'
+import { Query, FormDialog, Field } from 'components'
+import { TextField } from 'lib/fields'
 
-import { createUser, getDataForClientCreation } from 'api/users.graphql'
-import { getDataFromLocation } from 'api/actions'
+import { createClient, getDataForClientCreation } from 'api/clients.graphql'
 
 import withStyles from '@material-ui/core/styles/withStyles'
 
-import AppContext from 'AppContext'
+import { required, length } from 'lib/validators'
 
-const ClientCreate = ({ fullScreen, onComplete, location }) => (
-  <AppContext.Consumer>
-    {({ user }) => (
-      <Query query={getDataForClientCreation}>
-        {({ agencies }) => (
-          <FormDialog
-            title="Create Client"
-            form="ClientCreate"
-            mutation={createUser}
-            refetchQueries={['getClients']}
-            initialValues={{ ...getDataFromLocation(location), accountType: 'agencyClient' }}
-            btnSubmitText="Create"
-            success="Client created successfully"
-          >
-            {({ doc, invalid, submitting }) => (
-              <React.Fragment>
-                <FormSection name="">
-                  <ClientCreation doc={doc} agencies={agencies} user={user} />
-                </FormSection>
-              </React.Fragment>
-            )}
-          </FormDialog>
+const ClientCreate = ({ classes, match }) => (
+  <Query query={getDataForClientCreation} variables={match.params}>
+    {({ agencies }) => (
+      <FormDialog
+        title="Create Client"
+        form="ClientCreate"
+        mutation={createClient}
+        refetchQueries={['getClients']}
+        initialValues={{}}
+        btnSubmitText="Create"
+        success="Client created successfully"
+      >
+        {({ doc, invalid, submitting }) => (
+          <React.Fragment>
+            <Field name="name" component={TextField} label="Client Name" validate={[required(), length({ min: 2 })]} />
+          </React.Fragment>
         )}
-      </Query>
+      </FormDialog>
     )}
-  </AppContext.Consumer>
+  </Query>
 )
 
 const styles = () => ({
@@ -43,5 +37,3 @@ const styles = () => ({
 })
 
 export default withStyles(styles)(ClientCreate)
-
-// <Field name="profile.notes" component={TextField} label="Client Notes" multiline />

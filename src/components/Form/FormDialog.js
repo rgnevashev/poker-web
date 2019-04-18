@@ -53,7 +53,7 @@ const FormDialog = ({
           {buttons
             ? buttons(props)
             : [
-                <Button color="primary" onClick={props.submit} key="submit" disabled={props.submitting}>
+                <Button color="primary" variant="contained" onClick={props.submit} key="submit" disabled={props.submitting}>
                   {props.submitting ? 'Submitting...' : btnSubmitText}
                 </Button>
               ]}

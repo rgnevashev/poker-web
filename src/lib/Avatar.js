@@ -5,12 +5,11 @@ import md5 from 'md5'
 import url from 'url'
 
 const Avatar = props => {
-  const { avatar = '', name = '', email = '', size = 50, d = 'mm', round = true } = props
+  const { avatar = '', name = '', email = '', size = 50, d = 'mp', round = true, style = {} } = props
   const s = size
   const hash = md5(email || '')
   const initials = String(name)
-    .split(' ')
-    .map(v => v.substr(0, 1).toUpperCase())
+    .match(/\b(\w)/g)
     .slice(0, 2)
     .join('')
   const query = { s }
@@ -31,6 +30,7 @@ const Avatar = props => {
   }
 
   const styles = {
+    ...style,
     width: s,
     height: s
   }
